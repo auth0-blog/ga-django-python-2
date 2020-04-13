@@ -27,6 +27,29 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+from dotenv import load_dotenv
+project_folder = os.path.expanduser('/Users/kapehe/Documents/GitHub-Testing/ga-django-python/') # update this line to your path
+load_dotenv(os.path.join(project_folder, '.env')) 
+SOCIAL_AUTH_AUTH0_DOMAIN = os.getenv("SOCIAL_AUTH_AUTH0_DOMAIN")
+SOCIAL_AUTH_AUTH0_KEY = os.getenv("SOCIAL_AUTH_AUTH0_KEY")
+SOCIAL_AUTH_AUTH0_SECRET = os.getenv("SOCIAL_AUTH_AUTH0_SECRET")
+
+# Setting up Auth0 Scope
+SOCIAL_AUTH_AUTH0_SCOPE = [
+    'openid',
+    'profile',
+    'email'
+]
+
+# Setting up Authentication Backends
+AUTHENTICATION_BACKENDS = {
+    "auth0login.auth0backend.Auth0",
+    "django.contrib.auth.backends.ModelBackend",
+}
+
+# Setting up login and redirect URLs
+LOGIN_URL = "/login/auth0/"
+LOGIN_REDIRECT_URL = "/"
 
 # Application definition
 
@@ -38,6 +61,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'social_django',
+    'auth0login',
 ]
 
 MIDDLEWARE = [
@@ -122,3 +147,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+import django_heroku
+django_heroku.settings(locals())
