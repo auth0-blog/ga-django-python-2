@@ -1,1 +1,1 @@
-web: gunicorn codeshare.wsgi
+web: gunicorn ga-django-python.wsgi
