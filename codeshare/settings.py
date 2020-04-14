@@ -48,8 +48,8 @@ AUTHENTICATION_BACKENDS = {
 }
 
 # Setting up login and redirect URLs
-LOGIN_URL = "/login/auth0/"
-LOGIN_REDIRECT_URL = "/"
+LOGIN_URL = "https://codeshare-auth0-2.herokuapp.com/login/auth0/"
+LOGIN_REDIRECT_URL = "https://codeshare-auth0-2.herokuapp.com/"
 
 # Application definition
 
